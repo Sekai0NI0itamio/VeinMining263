@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nonnull;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -35,7 +34,7 @@ public class BlockGroupsResourceListener extends SimpleJsonResourceReloadListene
   }
 
   @Override
-  protected void apply(@Nonnull Map<ResourceLocation, JsonElement> object,
+  protected void apply(Map<ResourceLocation, JsonElement> object,
                        @Nonnull ResourceManager resourceManager,
                        @Nonnull ProfilerFiller profilerFiller) {
     List<Set<String>> blocks = new ArrayList<>();

@@ -19,7 +19,7 @@ package com.illusivesoulworks.veinmining.common.network;
 
 import com.illusivesoulworks.veinmining.VeinMiningConstants;
 import com.illusivesoulworks.veinmining.common.veinmining.VeinMiningPlayers;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -46,7 +46,7 @@ public record CPacketState(boolean activate) implements CustomPacketPayload {
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Type<? extends CustomPacketPayload> type() {
     return TYPE;
