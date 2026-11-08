@@ -10,11 +10,11 @@ import net.minecraft.server.level.ServerPlayer;
 public class CPacketState {
 
   public static final ResourceLocation ID =
-      ResourceLocation.fromNamespaceAndPath(VeinMiningConstants.MOD_ID, "state");
+      new ResourceLocation(VeinMiningConstants.MOD_ID, "state");
 
   public static void handle(boolean activate, ServerPlayer player) {
     if (activate) {
-      VeinMiningPlayers.activateVeinMining(player, player.level.getGameTime());
+      VeinMiningPlayers.activateVeinMining(player, player.level().getGameTime());
     } else {
       VeinMiningPlayers.deactivateVeinMining(player);
     }

@@ -31,5 +31,5 @@ public class VeinMiningConstants {
   public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
   public static final ResourceKey<Enchantment> ENCHANTMENT =
       ResourceKey.create(Registries.ENCHANTMENT,
-          ResourceLocation.fromNamespaceAndPath(MOD_ID, "vein_mining"));
+          new ResourceLocation(MOD_ID, "vein_mining"));
 }

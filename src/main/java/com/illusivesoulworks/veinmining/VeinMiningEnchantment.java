@@ -18,15 +18,15 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 public class VeinMiningEnchantment extends Enchantment {
 
   public static final ResourceLocation ID =
-      ResourceLocation.fromNamespaceAndPath(VeinMiningConstants.MOD_ID, "vein_mining");
+      new ResourceLocation(VeinMiningConstants.MOD_ID, "vein_mining");
   public static final VeinMiningEnchantment INSTANCE = new VeinMiningEnchantment();
 
   private static final TagKey<net.minecraft.world.item.Item> MINING_LOOT =
       TagKey.create(Registries.ITEM,
-          ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/mining_loot"));
+          new ResourceLocation("minecraft", "enchantable/mining_loot"));
 
   protected VeinMiningEnchantment() {
-    super(EnchantmentCategory.PICKAXE, EquipmentSlot.MAINHAND);
+    super(EnchantmentCategory.DIGGER, EquipmentSlot.MAINHAND);
   }
 
   @Override

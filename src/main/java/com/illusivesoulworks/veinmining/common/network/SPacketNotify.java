@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 public class SPacketNotify {
 
   public static final ResourceLocation ID =
-      ResourceLocation.fromNamespaceAndPath(VeinMiningConstants.MOD_ID, "notify");
+      new ResourceLocation(VeinMiningConstants.MOD_ID, "notify");
 
   public static void handle() {
     ClientPackets.handleNotification();

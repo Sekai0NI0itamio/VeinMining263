@@ -39,7 +39,7 @@ public class VeinMiningLogic {
           Direction.NORTH, Direction.SOUTH};
 
   public static void veinMine(ServerPlayer playerEntity, BlockPos pos, BlockState sourceState) {
-    ServerLevel world = (ServerLevel) playerEntity.level;
+    ServerLevel world = (ServerLevel) playerEntity.level();
     ItemStack stack = playerEntity.getMainHandItem();
     Block source = sourceState.getBlock();
     boolean notCorrect = VeinMiningConfig.SERVER.requireCorrectTool.get() &&

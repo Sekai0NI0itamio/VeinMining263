@@ -65,7 +65,7 @@ public class VeinMiningPlayers {
   }
 
   public static void startVeinMining(Player player) {
-    CURRENT_MINERS.put(player.getUUID(), player.level.getGameTime());
+    CURRENT_MINERS.put(player.getUUID(), player.level().getGameTime());
   }
 
   public static void stopVeinMining(Player player) {

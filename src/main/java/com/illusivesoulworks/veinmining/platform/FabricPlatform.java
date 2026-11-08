@@ -65,7 +65,7 @@ public class FabricPlatform implements IPlatform {
 
   @Override
   public boolean harvest(ServerPlayer player, BlockPos pos, BlockPos originPos) {
-    Level level = player.level;
+    Level level = player.level();
     BlockState blockState = level.getBlockState(pos);
     GameType gameModeForPlayer = player.gameMode.getGameModeForPlayer();
 
@@ -106,8 +106,7 @@ public class FabricPlatform implements IPlatform {
     boolean bl2 = player.hasCorrectToolForDrops(blockState);
     // 1.20.1 has no ItemStack.mineBlock; damage the tool directly
     // (VeinMiningMixinHooks still adjusts the amount via the mixin).
-    itemStack.hurtAndBreak(1, player,
-        p -> p.broadcastBreakAnimation(EquipmentSlot.MAINHAND));
+    itemStack.hurtAndBreak(1, player, p -> {});
 
     if (bl && bl2) {
       BlockPos spawnPos = VeinMiningConfig.SERVER.relocateDrops.get() ? originPos : pos;

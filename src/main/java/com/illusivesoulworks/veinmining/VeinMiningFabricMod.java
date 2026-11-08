@@ -25,8 +25,8 @@ public class VeinMiningFabricMod implements ModInitializer {
   public void onInitialize() {
     VeinMiningConfig.setup();
     // 1.20.1: enchantments are code-registered (datapack enchantments came in 1.20.5)
-    Registry.register(Registries.ENCHANTMENT, VeinMiningEnchantment.ID,
-        VeinMiningEnchantment.INSTANCE);
+    Registry.register(net.minecraft.core.registries.BuiltInRegistries.ENCHANTMENT,
+        VeinMiningEnchantment.ID, VeinMiningEnchantment.INSTANCE);
     ServerLifecycleEvents.SERVER_STARTED.register(server -> VeinMiningEvents.reloadDatapack());
     ServerTickEvents.END_WORLD_TICK.register(VeinMiningEvents::tick);
     ResourceManagerHelper resourceManagerHelper = ResourceManagerHelper.get(PackType.SERVER_DATA);

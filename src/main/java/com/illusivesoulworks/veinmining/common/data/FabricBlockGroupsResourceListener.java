@@ -8,7 +8,7 @@ public class FabricBlockGroupsResourceListener extends BlockGroupsResourceListen
     IdentifiableResourceReloadListener {
 
   private static final ResourceLocation ID =
-      ResourceLocation.fromNamespaceAndPath(VeinMiningConstants.MOD_ID, "groups");
+      new ResourceLocation(VeinMiningConstants.MOD_ID, "groups");
 
   @Override
   public ResourceLocation getFabricId() {
