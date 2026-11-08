@@ -50,7 +50,7 @@ jobs:
           mc-runtime-test: fabric
           java: 21
           xvfb: "true"
-          fabric-api: 0.116.15+1.21.1
+          fabric-api: 0.116.15
           headlessmc-command: '--jvm "-DMcRuntimeGameTest=false"'
 
       - name: Upload runtime logs
