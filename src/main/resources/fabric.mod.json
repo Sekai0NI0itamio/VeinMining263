@@ -16,7 +16,11 @@
   "license": "LGPL-3.0-only",
   "icon": "veinmining_icon.png",
   "environment": "*",
-  "entrypoints": {},
+  "entrypoints": {
+    "main": [
+      "com.illusivesoulworks.veinmining.VeinMiningFabricMod"
+    ]
+  },
   "mixins": [
     "veinmining.mixins.json",
     "veinmining.fabric.mixins.json"
