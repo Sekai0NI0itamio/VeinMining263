@@ -4,6 +4,7 @@ import com.illusivesoulworks.veinmining.mixin.VeinMiningMixinHooks;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,13 +20,14 @@ public class MixinItemStack {
       at = @At(
           value = "INVOKE",
           target = "net/minecraft/world/item/ItemStack.isDamageableItem()Z"),
-      method = "hurtAndBreak(ILnet/minecraft/server/level/ServerPlayer;Ljava/util/function/Consumer;)V",
+      method = "hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V",
       cancellable = true)
   private void veinmining$itemDamage(int amount,
-                                     @Nullable ServerPlayer serverPlayer, Consumer<Item> consumer,
+                                     @Nullable LivingEntity entity, Consumer<Item> consumer,
                                      CallbackInfo ci) {
 
-    if (VeinMiningMixinHooks.shouldCancelItemDamage(serverPlayer)) {
+    if (VeinMiningMixinHooks.shouldCancelItemDamage(
+        entity instanceof ServerPlayer serverPlayer ? serverPlayer : null)) {
       ci.cancel();
     }
   }
@@ -33,12 +35,13 @@ public class MixinItemStack {
   @SuppressWarnings("ConstantConditions")
   @ModifyVariable(
       at = @At("HEAD"),
-      method = "hurtAndBreak(ILnet/minecraft/server/level/ServerPlayer;Ljava/util/function/Consumer;)V",
+      method = "hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V",
       argsOnly = true
   )
   private int veinmining$changeBreak(int amount, int unused,
-                                     @Nullable ServerPlayer serverPlayer) {
+                                     @Nullable LivingEntity entity) {
 
-    return VeinMiningMixinHooks.modifyItemDamage((ItemStack) (Object) this, amount, serverPlayer);
+    return VeinMiningMixinHooks.modifyItemDamage((ItemStack) (Object) this, amount,
+        entity instanceof ServerPlayer serverPlayer ? serverPlayer : null);
   }
 }
