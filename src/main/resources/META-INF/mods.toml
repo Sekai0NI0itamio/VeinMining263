@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="LGPL-3.0-only"
+
+[[mods]]
+modId="veinmining"
+version="1.0.0"
+displayName="Vein Mining"
+authors="Itamio, illusivesoulworks"
+description='''Adds the Vein Mining enchantment, which lets the enchanted tool break matching connected blocks. Unofficial Forge port of Vein Mining by illusivesoulworks (LGPL-3.0-only).'''
+
+[[dependencies.veinmining]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.veinmining]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"

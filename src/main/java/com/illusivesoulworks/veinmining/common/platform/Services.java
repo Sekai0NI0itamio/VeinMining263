@@ -1,14 +1,14 @@
 package com.illusivesoulworks.veinmining.common.platform;
 
 import com.illusivesoulworks.veinmining.common.platform.services.IPlatform;
-import com.illusivesoulworks.veinmining.platform.FabricPlatform;
+import com.illusivesoulworks.veinmining.platform.ForgePlatform;
 
-/** Fabric-only: platform is always the Fabric implementation (no ServiceLoader). */
+/** Forge port: platform is always the Forge implementation (no ServiceLoader). */
 public class Services {
 
-  public static final IPlatform PLATFORM = new FabricPlatform();
+  public static final IPlatform PLATFORM = new ForgePlatform();
 
   public static <T> T load(Class<T> clazz) {
-    throw new UnsupportedOperationException("ServiceLoader is not used in the Fabric port");
+    throw new UnsupportedOperationException("ServiceLoader is not used in the Forge port");
   }
 }

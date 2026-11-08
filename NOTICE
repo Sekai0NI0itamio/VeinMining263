@@ -6,3 +6,7 @@ Unofficial port of Vein Mining by illusivesoulworks
 illusivesoulworks. Fabric-only port: Forge/NeoForge platform code and
 the SpectreLib dependency are dropped; config is plain JSON
 (config/veinmining.json) with the original options and defaults.
+
+Forge port for Minecraft 1.20.1 (Forge 47.4.20) by Itamio.
+Full original logic ported: code-registered enchantment, vein-mining
+logic, mixins, config (JSON), and networking via Forge SimpleChannel.

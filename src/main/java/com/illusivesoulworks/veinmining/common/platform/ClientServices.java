@@ -1,10 +1,10 @@
 package com.illusivesoulworks.veinmining.common.platform;
 
 import com.illusivesoulworks.veinmining.common.platform.services.IClientPlatform;
-import com.illusivesoulworks.veinmining.platform.FabricClientPlatform;
+import com.illusivesoulworks.veinmining.platform.ForgeClientPlatform;
 
-/** Fabric-only: client platform is always the Fabric implementation. */
+/** Forge port: client platform is always the Forge implementation. */
 public class ClientServices {
 
-  public static final IClientPlatform PLATFORM = new FabricClientPlatform();
+  public static final IClientPlatform PLATFORM = new ForgeClientPlatform();
 }

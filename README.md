@@ -1,36 +1,31 @@
-# Vein Mining — Fabric port for Minecraft 1.20.1
-![Mod loader: Fabric](https://img.shields.io/badge/modloader-Fabric-1976d2?style=for-the-badge)
+# Vein Mining — Forge Port for Minecraft 1.20.1
+![Mod loader: Forge](https://img.shields.io/badge/modloader-Forge-orange?style=for-the-badge)
 ![Minecraft: 1.20.1](https://img.shields.io/badge/Minecraft-1.20.1-green?style=for-the-badge)
 ![GitHub license](https://img.shields.io/github/license/Sekai0NI0itamio/VeinMining263?style=for-the-badge)
 
 **Adds the Vein Mining enchantment**, which lets the enchanted tool
-break matching connected blocks. Highly configurable in the original.
+break matching connected blocks. Highly configurable: users edit
+`config/veinmining.json` (created with defaults on first launch).
 
-This is a **full Fabric port for Minecraft 1.20.1** of
-[Vein Mining](https://github.com/illusivesoulworks/veinmining) by
-**illusivesoulworks**. The original vein-mining logic
-(`VeinMiningLogic`, `BlockProcessor`, `BlockGroups`), block-break
-events, mixins (drop relocation, tool damage), activation keybinding,
-enchantment tooltips/warnings, and client/server state packets are
-ported. Forge/NeoForge platform code and the SpectreLib dependency are
-dropped: configuration is plain JSON at `config/veinmining.json` with
-the same options and defaults as the original (the original's
-SpectreLib GUI config is not included).
-
-> **Enchantment:** in 1.20.1 enchantments are code-registered, so the Vein Mining enchantment is registered in code (`VeinMiningEnchantment`, `Registry.register(Registries.ENCHANTMENT, ...)`), mirroring the original datapack definition (max level 1, weight 2, anvil cost 4, mainhand, mining tools). No datapack enchantment JSON is used.
+This is a **Forge port for Minecraft 1.20.1** (Forge 47.4.20).
 
 ### Port notes (1.20.1)
-- Java 17 · Fabric Loader 0.16.14+ · Fabric API 0.92.11+1.20.1
+- Full original logic ported: code-registered enchantment (still
+  possible in 1.20.1, before datapack enchantments in 1.20.5),
+  vein-mining BFS logic, block groups datapack listener, tool
+  damage / exhaustion / drop relocation mixins, client key
+  activation + tooltips, and Forge SimpleChannel networking
+  (state + notify packets).
+- Java 17 · ForgeGradle [6.0,6.2) · official Mojang mappings
 - Built and verified in CI via GitHub Actions, including a headless
   runtime test that launches the client, joins a world, and quits cleanly
 
 ### Installation
-1. Install Fabric Loader for Minecraft 1.20.1
-2. Install Fabric API
-3. Drop `veinmining263-*.jar` into your `mods` folder
+1. Install Forge 47.4.20 for Minecraft 1.20.1
+2. Drop `veinmining-1.20.1-forge-*.jar` into your `mods` folder
 
 ### Original mod & credit
-Unofficial port by **Itamio** of **Vein Mining** by
-**illusivesoulworks** (9.7M downloads, max 1.21, LGPL-3.0-only).
+Unofficial Forge port by **Itamio** of **Vein Mining** by
+**illusivesoulworks** (9.7M downloads, LGPL-3.0-only).
 Original: https://modrinth.com/mod/vein-mining ·
 https://github.com/illusivesoulworks/veinmining · See `NOTICE`.

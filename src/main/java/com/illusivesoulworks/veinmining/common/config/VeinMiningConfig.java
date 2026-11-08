@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 /**
  * Plain-JSON replacement for the original SpectreLib config. Field names,
@@ -26,7 +26,7 @@ public class VeinMiningConfig {
   private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
   public static void setup() {
-    Path dir = FabricLoader.getInstance().getConfigDir();
+    Path dir = FMLPaths.CONFIGDIR.get();
     Path file = dir.resolve(VeinMiningConstants.MOD_ID + ".json");
     Root data = new Root();
     if (Files.exists(file)) {
