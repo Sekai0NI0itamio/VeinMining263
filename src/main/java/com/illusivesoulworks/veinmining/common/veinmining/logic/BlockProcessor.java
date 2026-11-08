@@ -144,7 +144,7 @@ public class BlockProcessor {
       TagKey<Block> blockTagKey = named.key();
 
       if (blockState.is(blockTagKey)) {
-        tags.add(blockTagKey.identifier().toString());
+        tags.add(blockTagKey.location().toString());
       }
     });
     return tags;

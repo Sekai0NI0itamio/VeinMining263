@@ -36,9 +36,9 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
   private List<Set<String>> groups = new ArrayList<>();
 
   @Override
-  public void reload(PreparableReloadListener.SharedState sharedState, Executor executor,
-                     PreparableReloadListener.PreparationBarrier preparationBarrier,
-                     Executor executor2) {
+  public java.util.concurrent.CompletableFuture<Void> reload(
+      PreparableReloadListener.SharedState sharedState, Executor executor,
+      PreparableReloadListener.PreparationBarrier preparationBarrier, Executor executor2) {
     ResourceManager resourceManager = sharedState.resourceManager();
     List<Set<String>> blocks = new ArrayList<>();
     Map<Identifier, Resource> files = resourceManager.listResources(
@@ -56,6 +56,7 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
     }
     this.groups = blocks;
     VeinMiningEvents.reloadDatapack();
+    return java.util.concurrent.CompletableFuture.completedFuture(null);
   }
 
   @Override

@@ -37,7 +37,8 @@ public class VeinMiningKey {
   public static final class Mapping extends KeyMapping {
 
     public Mapping(String pName, int pKeyCode, String pCategory) {
-      super(pName, pKeyCode, KeyMapping.Category.register(pCategory));
+      super(pName, pKeyCode, KeyMapping.Category.register(
+          net.minecraft.resources.Identifier.fromNamespaceAndPath("veinmining", "vein_mining")));
     }
   }
 }
