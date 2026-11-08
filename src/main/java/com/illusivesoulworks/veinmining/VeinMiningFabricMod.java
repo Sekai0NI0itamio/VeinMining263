@@ -40,7 +40,6 @@ public class VeinMiningFabricMod implements ModInitializer {
 
   @Override
   public void onInitialize() {
-    VeinMiningConfig.setup();
     ServerLifecycleEvents.SERVER_STARTED.register(server -> VeinMiningEvents.reloadDatapack());
     ServerTickEvents.END_WORLD_TICK.register(VeinMiningEvents::tick);
     ResourceManagerHelper resourceManagerHelper = ResourceManagerHelper.get(PackType.SERVER_DATA);
