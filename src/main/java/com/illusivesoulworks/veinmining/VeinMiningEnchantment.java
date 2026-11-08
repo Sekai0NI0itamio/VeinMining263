@@ -27,7 +27,8 @@ public class VeinMiningEnchantment extends Enchantment {
           new ResourceLocation("minecraft", "enchantable/mining_loot"));
 
   protected VeinMiningEnchantment() {
-    super(Rarity.COMMON, EnchantmentCategory.DIGGER, EquipmentSlot.MAINHAND);
+    super(Rarity.COMMON, EnchantmentCategory.DIGGER,
+        new EquipmentSlot[]{EquipmentSlot.MAINHAND});
   }
 
   @Override
