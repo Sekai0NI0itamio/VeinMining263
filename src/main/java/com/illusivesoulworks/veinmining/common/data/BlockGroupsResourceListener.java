@@ -35,8 +35,8 @@ public class BlockGroupsResourceListener extends SimpleJsonResourceReloadListene
 
   @Override
   protected void apply(Map<ResourceLocation, JsonElement> object,
-                       @Nonnull ResourceManager resourceManager,
-                       @Nonnull ProfilerFiller profilerFiller) {
+                       ResourceManager resourceManager,
+                       ProfilerFiller profilerFiller) {
     List<Set<String>> blocks = new ArrayList<>();
 
     for (Map.Entry<ResourceLocation, JsonElement> entry : object.entrySet()) {
