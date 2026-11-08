@@ -6,6 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Rarity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
@@ -26,7 +27,7 @@ public class VeinMiningEnchantment extends Enchantment {
           new ResourceLocation("minecraft", "enchantable/mining_loot"));
 
   protected VeinMiningEnchantment() {
-    super(EnchantmentCategory.DIGGER, EquipmentSlot.MAINHAND);
+    super(Rarity.COMMON, EnchantmentCategory.DIGGER, EquipmentSlot.MAINHAND);
   }
 
   @Override
