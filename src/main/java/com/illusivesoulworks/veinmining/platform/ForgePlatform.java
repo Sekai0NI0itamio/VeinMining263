@@ -2,7 +2,6 @@ package com.illusivesoulworks.veinmining.platform;
 
 import com.illusivesoulworks.veinmining.common.config.VeinMiningConfig;
 import com.illusivesoulworks.veinmining.common.network.SPacketNotify;
-import com.illusivesoulworks.veinmining.common.network.VeinMiningForgeNetwork;
 import com.illusivesoulworks.veinmining.common.platform.services.IPlatform;
 import com.illusivesoulworks.veinmining.common.veinmining.VeinMiningPlayers;
 import java.util.HashSet;
@@ -32,7 +31,7 @@ public class ForgePlatform implements IPlatform {
 
   @Override
   public void sendNotifyS2C(ServerPlayer player) {
-    VeinMiningForgeNetwork.get().sendTo(player, SPacketNotify.INSTANCE);
+    PacketDistributor.sendToPlayer(player, SPacketNotify.INSTANCE);
   }
 
   @Override

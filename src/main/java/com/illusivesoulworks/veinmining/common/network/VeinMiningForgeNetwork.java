@@ -37,8 +37,8 @@ public class VeinMiningForgeNetwork {
     instance.registerMessage(nextId(), CPacketState.class,
         CPacketState::encode, CPacketState::decode,
         (packet, ctx) -> {
-          ctx.enqueueWork(() -> CPacketState.handle(packet, ctx.getSender()));
-          ctx.setPacketHandled(true);
+          ctx.get().enqueueWork(() -> CPacketState.handle(packet, ctx.get().getSender()));
+          ctx.get().setPacketHandled(true);
         });
   }
 
@@ -47,8 +47,8 @@ public class VeinMiningForgeNetwork {
         SPacketNotify::encode, SPacketNotify::decode,
         (packet, ctx) -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
             () -> () -> {
-              ctx.enqueueWork(SPacketNotify::handle);
-              ctx.setPacketHandled(true);
+              ctx.get().enqueueWork(SPacketNotify::handle);
+              ctx.get().setPacketHandled(true);
             }));
   }
 }
