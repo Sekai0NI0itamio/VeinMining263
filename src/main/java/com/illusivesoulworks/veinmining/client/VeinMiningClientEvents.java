@@ -31,7 +31,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -86,7 +85,7 @@ public class VeinMiningClientEvents {
     Minecraft mc = Minecraft.getInstance();
     LocalPlayer player = mc.player;
 
-    if (player != null && needsEnchantment && !(stack.getItem() instanceof EnchantedBookItem)) {
+    if (player != null && needsEnchantment && stack.getItem() != net.minecraft.world.item.Items.ENCHANTED_BOOK) {
 
       if (VeinMiningConfig.CLIENT.enableEnchantmentTooltips.get()) {
         Holder<Enchantment> enchantment = player.registryAccess().lookup(Registries.ENCHANTMENT)

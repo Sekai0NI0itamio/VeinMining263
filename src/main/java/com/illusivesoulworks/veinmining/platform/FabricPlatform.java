@@ -30,7 +30,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.food.FoodData;
@@ -50,7 +50,7 @@ public class FabricPlatform implements IPlatform {
   }
 
   @Override
-  public Set<String> getBlocksFromTag(ResourceLocation resourceLocation) {
+  public Set<String> getBlocksFromTag(Identifier resourceLocation) {
     Set<String> result = new HashSet<>();
     BuiltInRegistries.BLOCK.getTag(TagKey.create(Registries.BLOCK, resourceLocation))
         .ifPresent(block -> {
@@ -62,12 +62,12 @@ public class FabricPlatform implements IPlatform {
   }
 
   @Override
-  public Block getBlock(ResourceLocation resourceLocation) {
+  public Block getBlock(Identifier resourceLocation) {
     return BuiltInRegistries.BLOCK.get(resourceLocation);
   }
 
   @Override
-  public Optional<ResourceLocation> getResourceLocation(Block block) {
+  public Optional<Identifier> getResourceLocation(Block block) {
     return Optional.of(BuiltInRegistries.BLOCK.getKey(block));
   }
 
