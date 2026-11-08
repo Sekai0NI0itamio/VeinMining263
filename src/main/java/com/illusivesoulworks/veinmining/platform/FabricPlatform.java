@@ -33,7 +33,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -52,18 +51,15 @@ public class FabricPlatform implements IPlatform {
   @Override
   public Set<String> getBlocksFromTag(Identifier resourceLocation) {
     Set<String> result = new HashSet<>();
-    BuiltInRegistries.BLOCK.getTag(TagKey.create(Registries.BLOCK, resourceLocation))
-        .ifPresent(block -> {
-          for (Holder<Block> blockHolder : block) {
-            blockHolder.unwrapKey().ifPresent(key -> result.add(key.location().toString()));
-          }
-        });
+    BuiltInRegistries.BLOCK.getTagOrEmpty(TagKey.create(Registries.BLOCK, resourceLocation))
+        .forEach(blockHolder -> blockHolder.unwrapKey()
+            .ifPresent(key -> result.add(key.identifier().toString())));
     return result;
   }
 
   @Override
   public Block getBlock(Identifier resourceLocation) {
-    return BuiltInRegistries.BLOCK.get(resourceLocation);
+    return BuiltInRegistries.BLOCK.getValue(resourceLocation);
   }
 
   @Override
@@ -82,7 +78,7 @@ public class FabricPlatform implements IPlatform {
     BlockState blockState = level.getBlockState(pos);
     GameType gameModeForPlayer = player.gameMode.getGameModeForPlayer();
 
-    if (!player.getMainHandItem().getItem().canAttackBlock(blockState, level, pos, player)) {
+    if (!player.getMainHandItem().getItem().canDestroyBlock(player.getMainHandItem(), blockState, level, pos, player)) {
       return false;
     }
     BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -121,19 +117,20 @@ public class FabricPlatform implements IPlatform {
 
     if (bl && bl2) {
       BlockPos spawnPos = VeinMiningConfig.SERVER.relocateDrops.get() ? originPos : pos;
-      FoodData foodData = player.getFoodData();
-      float currentExhaustion = foodData.getExhaustionLevel();
       VeinMiningPlayers.addMiningBlock(level, pos, spawnPos);
       block.playerDestroy(level, player, pos, blockState, blockEntity, itemStack2);
       VeinMiningPlayers.removeMiningBlock(level, pos);
 
+      // 1.21.11 FoodData no longer exposes exhaustion getters/setters, so the
+      // original measure-and-rescale is approximated around the vanilla
+      // per-block mining exhaustion (0.1).
       if (VeinMiningConfig.SERVER.addExhaustion.get()) {
-        float diff = foodData.getExhaustionLevel() - currentExhaustion;
-        foodData.setExhaustion(currentExhaustion);
-        foodData.addExhaustion(
-            (float) (diff * VeinMiningConfig.SERVER.exhaustionMultiplier.get()));
+        float multiplier = VeinMiningConfig.SERVER.exhaustionMultiplier.get();
+        if (multiplier != 1.0F) {
+          player.causeFoodExhaustion(0.1F * (multiplier - 1.0F));
+        }
       } else {
-        foodData.setExhaustion(currentExhaustion);
+        player.causeFoodExhaustion(-0.1F);
       }
     }
     return true;

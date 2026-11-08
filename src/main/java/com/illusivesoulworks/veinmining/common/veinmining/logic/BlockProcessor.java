@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.TagKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -139,10 +140,11 @@ public class BlockProcessor {
 
   private static Set<String> getTagsFor(BlockState blockState) {
     Set<String> tags = new HashSet<>();
-    BuiltInRegistries.BLOCK.getTagNames().forEach(blockTagKey -> {
+    BuiltInRegistries.BLOCK.getTags().forEach(named -> {
+      TagKey<Block> blockTagKey = named.key();
 
       if (blockState.is(blockTagKey)) {
-        tags.add(blockTagKey.location().toString());
+        tags.add(blockTagKey.identifier().toString());
       }
     });
     return tags;

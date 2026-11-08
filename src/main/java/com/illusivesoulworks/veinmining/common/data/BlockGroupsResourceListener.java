@@ -16,9 +16,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executor;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
 
@@ -34,9 +36,12 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
   private List<Set<String>> groups = new ArrayList<>();
 
   @Override
-  public void onResourceManagerReload(ResourceManager resourceManager) {
+  public void reload(PreparableReloadListener.SharedState sharedState, Executor executor,
+                     PreparableReloadListener.PreparationBarrier preparationBarrier,
+                     Executor executor2) {
+    ResourceManager resourceManager = sharedState.resourceManager();
     List<Set<String>> blocks = new ArrayList<>();
-    Map<Identifier, Resource> files = resourceManager.listMatchingResources(
+    Map<Identifier, Resource> files = resourceManager.listResources(
         "veinmining", id -> id.getPath().endsWith("groups.json"));
 
     for (Map.Entry<Identifier, Resource> entry : files.entrySet()) {

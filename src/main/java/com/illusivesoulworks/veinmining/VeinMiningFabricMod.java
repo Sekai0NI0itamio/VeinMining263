@@ -59,7 +59,7 @@ public class VeinMiningFabricMod implements ModInitializer {
     PayloadTypeRegistry.playS2C().register(SPacketNotify.TYPE, SPacketNotify.STREAM_CODEC);
     ServerPlayNetworking.registerGlobalReceiver(CPacketState.TYPE, (payload, context) -> {
       ServerPlayer player = context.player();
-      MinecraftServer server = player.getServer();
+      MinecraftServer server = player.level().getServer();
       boolean activate = payload.activate();
 
       if (server != null) {
