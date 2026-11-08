@@ -23,7 +23,8 @@ import net.minecraft.world.level.block.GameMasterBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.NetworkDirection;
+import com.illusivesoulworks.veinmining.common.network.VeinMiningForgeNetwork;
 
 /** Forge port of the platform layer (1.20.1). Logic mirrors the original
  *  ForgePlatform / FabricPlatform harvest implementation. */
@@ -31,7 +32,7 @@ public class ForgePlatform implements IPlatform {
 
   @Override
   public void sendNotifyS2C(ServerPlayer player) {
-    PacketDistributor.sendToPlayer(player, SPacketNotify.INSTANCE);
+    VeinMiningForgeNetwork.get().sendTo(SPacketNotify.INSTANCE, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
   }
 
   @Override
