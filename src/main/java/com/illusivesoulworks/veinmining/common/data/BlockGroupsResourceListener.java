@@ -39,6 +39,7 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
   public java.util.concurrent.CompletableFuture<Void> reload(
       PreparableReloadListener.SharedState sharedState, Executor executor,
       PreparableReloadListener.PreparationBarrier preparationBarrier, Executor executor2) {
+    com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload start");
     ResourceManager resourceManager = sharedState.resourceManager();
     List<Set<String>> blocks = new ArrayList<>();
     Map<Identifier, Resource> files = resourceManager.listResources(
@@ -55,7 +56,9 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
       }
     }
     this.groups = blocks;
+    com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload parsed");
     VeinMiningEvents.reloadDatapack();
+    com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload done");
     return java.util.concurrent.CompletableFuture.completedFuture(null);
   }
 
