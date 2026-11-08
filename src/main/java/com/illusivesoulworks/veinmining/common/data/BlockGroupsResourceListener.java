@@ -39,7 +39,6 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
   public java.util.concurrent.CompletableFuture<Void> reload(
       PreparableReloadListener.SharedState sharedState, Executor executor,
       PreparableReloadListener.PreparationBarrier preparationBarrier, Executor executor2) {
-    com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload start");
     // Follow the standard prepare/apply reload pattern: parsing runs on the
     // prepare executor, then the preparation barrier must be awaited before
     // applying results on the apply executor. Returning a bare completed
@@ -51,7 +50,6 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
         .thenAcceptAsync(groups -> {
           this.groups = groups;
           VeinMiningEvents.reloadDatapack();
-          com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload done");
         }, executor2);
   }
 
@@ -70,7 +68,6 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
             entry.getKey(), e);
       }
     }
-    com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload parsed");
     return blocks;
   }
 

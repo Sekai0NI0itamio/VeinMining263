@@ -40,7 +40,6 @@ public class VeinMiningFabricMod implements ModInitializer {
 
   @Override
   public void onInitialize() {
-    VeinMiningConstants.LOG.info("DIAG init start");
     VeinMiningConfig.setup();
     ServerLifecycleEvents.SERVER_STARTED.register(server -> VeinMiningEvents.reloadDatapack());
     ServerTickEvents.END_WORLD_TICK.register(VeinMiningEvents::tick);
@@ -70,6 +69,5 @@ public class VeinMiningFabricMod implements ModInitializer {
     ServerEntityEvents.EQUIPMENT_CHANGE.register(
         (livingEntity, equipmentSlot, previousStack, currentStack) -> VeinMiningEvents.toolEquip(
             currentStack, previousStack, equipmentSlot, livingEntity));
-    VeinMiningConstants.LOG.info("DIAG init end");
   }
 }
