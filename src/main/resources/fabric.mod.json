@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "veinmining263",
+  "version": "${version}",
+  "name": "Vein Mining",
+  "description": "Adds the Vein Mining enchantment. Unofficial port of Vein Mining by illusivesoulworks (LGPL-3.0-only) for Minecraft 26.3 (Fabric). See NOTICE for credit.",
+  "authors": ["Itamio", "illusivesoulworks"],
+  "contact": {"homepage": "https://github.com/Sekai0NI0itamio/VeinMining263", "sources": "https://github.com/illusivesoulworks/veinmining", "issues": "https://github.com/Sekai0NI0itamio/VeinMining263/issues"},
+  "license": "LGPL-3.0-only",
+  "environment": "*",
+  "entrypoints": {"main": ["itamio.veinmining.VeinMiningMod"]},
+  "depends": {"fabricloader": ">=0.20.1", "minecraft": "~26.3", "java": ">=25", "fabric-api": "*"}
+}

@@ -1,0 +1,8 @@
+NOTICE
+Vein Mining (Itamio port for Minecraft 26.3)
+Unofficial port of Vein Mining by illusivesoulworks
+(https://github.com/illusivesoulworks/veinmining, LGPL-3.0-only,
+9.7M downloads on Modrinth, max Minecraft 1.21). All credit to
+illusivesoulworks. Port status: enchantment registration became
+datapack-driven in 26.3; the enchantment + mining logic + networking
+rewrite is not ported in this loadable port. See README.
