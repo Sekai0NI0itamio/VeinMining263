@@ -41,6 +41,19 @@ public class VeinMiningFabricMod implements ModInitializer {
   @Override
   public void onInitialize() {
     VeinMiningConstants.LOG.info("DIAG init start");
+    VeinMiningConfig.setup();
+    ServerLifecycleEvents.SERVER_STARTED.register(server -> VeinMiningEvents.reloadDatapack());
+    ServerTickEvents.END_WORLD_TICK.register(VeinMiningEvents::tick);
+    ServerPlayConnectionEvents.DISCONNECT.register(
+        (handler, server) -> VeinMiningEvents.playerLoggedOut(handler.getPlayer()));
+    PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
+      if (player instanceof ServerPlayer serverPlayer) {
+        VeinMiningEvents.blockBreak(serverPlayer, pos, state);
+      }
+    });
+    ServerEntityEvents.EQUIPMENT_CHANGE.register(
+        (livingEntity, equipmentSlot, previousStack, currentStack) -> VeinMiningEvents.toolEquip(
+            currentStack, previousStack, equipmentSlot, livingEntity));
     VeinMiningConstants.LOG.info("DIAG init end");
   }
 }
