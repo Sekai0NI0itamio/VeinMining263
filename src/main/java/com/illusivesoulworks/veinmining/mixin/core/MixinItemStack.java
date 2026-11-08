@@ -2,7 +2,7 @@ package com.illusivesoulworks.veinmining.mixin.core;
 
 import com.illusivesoulworks.veinmining.mixin.VeinMiningMixinHooks;
 import java.util.function.Consumer;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
