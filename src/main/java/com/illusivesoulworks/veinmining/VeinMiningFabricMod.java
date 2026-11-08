@@ -41,35 +41,6 @@ public class VeinMiningFabricMod implements ModInitializer {
   @Override
   public void onInitialize() {
     VeinMiningConstants.LOG.info("DIAG init start");
-    VeinMiningConfig.setup();
-    ServerLifecycleEvents.SERVER_STARTED.register(server -> VeinMiningEvents.reloadDatapack());
-    ServerTickEvents.END_WORLD_TICK.register(VeinMiningEvents::tick);
-    ResourceManagerHelper resourceManagerHelper = ResourceManagerHelper.get(PackType.SERVER_DATA);
-    FabricBlockGroupsResourceListener fabricBlockGroupsResourceListener =
-        new FabricBlockGroupsResourceListener();
-    BlockGroupsResourceListener.INSTANCE = fabricBlockGroupsResourceListener;
-    resourceManagerHelper.registerReloadListener(fabricBlockGroupsResourceListener);
-    ServerPlayConnectionEvents.DISCONNECT.register(
-        (handler, server) -> VeinMiningEvents.playerLoggedOut(handler.getPlayer()));
-    PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
-      if (player instanceof ServerPlayer serverPlayer) {
-        VeinMiningEvents.blockBreak(serverPlayer, pos, state);
-      }
-    });
-    PayloadTypeRegistry.playC2S().register(CPacketState.TYPE, CPacketState.STREAM_CODEC);
-    PayloadTypeRegistry.playS2C().register(SPacketNotify.TYPE, SPacketNotify.STREAM_CODEC);
-    ServerPlayNetworking.registerGlobalReceiver(CPacketState.TYPE, (payload, context) -> {
-      ServerPlayer player = context.player();
-      MinecraftServer server = player.level().getServer();
-      boolean activate = payload.activate();
-
-      if (server != null) {
-        server.execute(() -> CPacketState.handle(activate, player));
-      }
-    });
-    ServerEntityEvents.EQUIPMENT_CHANGE.register(
-        (livingEntity, equipmentSlot, previousStack, currentStack) -> VeinMiningEvents.toolEquip(
-            currentStack, previousStack, equipmentSlot, livingEntity));
     VeinMiningConstants.LOG.info("DIAG init end");
   }
 }

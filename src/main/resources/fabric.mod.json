@@ -19,9 +19,6 @@
   "entrypoints": {
     "main": [
       "com.illusivesoulworks.veinmining.VeinMiningFabricMod"
-    ],
-    "client": [
-      "com.illusivesoulworks.veinmining.client.VeinMiningFabricClientMod"
     ]
   },
   "mixins": [
