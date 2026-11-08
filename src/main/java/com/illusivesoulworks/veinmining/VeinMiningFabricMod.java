@@ -44,9 +44,11 @@ public class VeinMiningFabricMod implements ModInitializer {
     VeinMiningConfig.setup();
     ServerLifecycleEvents.SERVER_STARTED.register(server -> VeinMiningEvents.reloadDatapack());
     ServerTickEvents.END_WORLD_TICK.register(VeinMiningEvents::tick);
+    ResourceManagerHelper resourceManagerHelper = ResourceManagerHelper.get(PackType.SERVER_DATA);
     FabricBlockGroupsResourceListener fabricBlockGroupsResourceListener =
         new FabricBlockGroupsResourceListener();
     BlockGroupsResourceListener.INSTANCE = fabricBlockGroupsResourceListener;
+    resourceManagerHelper.registerReloadListener(fabricBlockGroupsResourceListener);
     ServerPlayConnectionEvents.DISCONNECT.register(
         (handler, server) -> VeinMiningEvents.playerLoggedOut(handler.getPlayer()));
     PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {

@@ -40,7 +40,22 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
       PreparableReloadListener.SharedState sharedState, Executor executor,
       PreparableReloadListener.PreparationBarrier preparationBarrier, Executor executor2) {
     com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload start");
-    ResourceManager resourceManager = sharedState.resourceManager();
+    // Follow the standard prepare/apply reload pattern: parsing runs on the
+    // prepare executor, then the preparation barrier must be awaited before
+    // applying results on the apply executor. Returning a bare completed
+    // future stalls the whole reload (the loading screen never finishes).
+    java.util.concurrent.CompletableFuture<List<Set<String>>> prepared =
+        java.util.concurrent.CompletableFuture.supplyAsync(
+            () -> parseGroups(sharedState.resourceManager()), executor);
+    return prepared.thenCompose(preparationBarrier::wait)
+        .thenAcceptAsync(groups -> {
+          this.groups = groups;
+          VeinMiningEvents.reloadDatapack();
+          com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload done");
+        }, executor2);
+  }
+
+  private static List<Set<String>> parseGroups(ResourceManager resourceManager) {
     List<Set<String>> blocks = new ArrayList<>();
     Map<Identifier, Resource> files = resourceManager.listResources(
         "veinmining", id -> id.getPath().endsWith("groups.json"));
@@ -55,11 +70,8 @@ public class BlockGroupsResourceListener implements IdentifiableResourceReloadLi
             entry.getKey(), e);
       }
     }
-    this.groups = blocks;
     com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload parsed");
-    VeinMiningEvents.reloadDatapack();
-    com.illusivesoulworks.veinmining.VeinMiningConstants.LOG.info("DIAG reload done");
-    return java.util.concurrent.CompletableFuture.completedFuture(null);
+    return blocks;
   }
 
   @Override
