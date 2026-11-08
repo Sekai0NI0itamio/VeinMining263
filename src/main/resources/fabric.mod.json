@@ -1,13 +1,37 @@
 {
   "schemaVersion": 1,
-  "id": "veinmining263",
+  "id": "veinmining",
   "version": "${version}",
   "name": "Vein Mining",
-  "description": "Adds the Vein Mining enchantment. Unofficial port of Vein Mining by illusivesoulworks (LGPL-3.0-only) for Minecraft 26.3 (Fabric). See NOTICE for credit.",
-  "authors": ["Itamio", "illusivesoulworks"],
-  "contact": {"homepage": "https://github.com/Sekai0NI0itamio/VeinMining263", "sources": "https://github.com/illusivesoulworks/veinmining", "issues": "https://github.com/Sekai0NI0itamio/VeinMining263/issues"},
+  "description": "Adds the Vein Mining enchantment. Unofficial Fabric port of Vein Mining by illusivesoulworks (LGPL-3.0-only). See NOTICE for credit.",
+  "authors": [
+    "Itamio",
+    "illusivesoulworks"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Sekai0NI0itamio/VeinMining263",
+    "sources": "https://github.com/illusivesoulworks/veinmining",
+    "issues": "https://github.com/Sekai0NI0itamio/VeinMining263/issues"
+  },
   "license": "LGPL-3.0-only",
+  "icon": "veinmining_icon.png",
   "environment": "*",
-  "entrypoints": {"main": ["itamio.veinmining.VeinMiningMod"]},
-  "depends": {"fabricloader": ">=0.20.1", "minecraft": "~26.3", "java": ">=25", "fabric-api": "*"}
+  "entrypoints": {
+    "main": [
+      "com.illusivesoulworks.veinmining.VeinMiningFabricMod"
+    ],
+    "client": [
+      "com.illusivesoulworks.veinmining.client.VeinMiningFabricClientMod"
+    ]
+  },
+  "mixins": [
+    "veinmining.mixins.json",
+    "veinmining.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": ">=1.21.1 <1.22",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
 }
